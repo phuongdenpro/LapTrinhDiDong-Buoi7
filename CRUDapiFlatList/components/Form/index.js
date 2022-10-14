@@ -27,7 +27,7 @@ const Form = (props) => {
       KeyboardAvoidingView = {10}
       style={styles.addTask}
     >
-      <TextInput style={styles.input} placeholder="Your book"
+      <TextInput style={styles.input} placeholder="Your name book"
         onChangeText={(text) =>setBook(text)} value ={book}
       ></TextInput>
       <TouchableOpacity onPress={handleAddBook}>

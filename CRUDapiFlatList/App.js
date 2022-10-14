@@ -33,7 +33,8 @@ const App = () => {
     });
   };
   const handleUpdateBook = (name, id) =>{
-    fetch(apiUrl, {
+    let url = apiUrl + index;
+    fetch(url, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -59,12 +60,13 @@ const App = () => {
   }, []);
 
   const handleDeleteBook = (index) => {
+    let url = apiUrl + index;
     Alert.alert("Thông báo !", "Bạn có chắc chắn muốn xóa?", [
       {
         text: "OK",
         onPress: () => {
           fetch(
-            apiUrl + index,
+            url,
             {
               method: "DELETE",
               headers: {
