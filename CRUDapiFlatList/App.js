@@ -12,7 +12,7 @@ import {
   SafeAreaView,
   ActivityIndicator,
 } from "react-native";
-import Task from "./components/Task";
+import Item from "./components/Item";
 import styles from "./App.components.style";
 import Form from "./components/Form";
 
@@ -87,7 +87,7 @@ const App = () => {
           <FlatList
             data={bookList}
             renderItem={({ item }) => (
-              <Task
+              <Item
               key={bookList.indexOf(item)}
               title={item.item}
               link={item.link}

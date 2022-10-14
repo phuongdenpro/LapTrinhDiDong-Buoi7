@@ -1,7 +1,7 @@
 import { View, Text, TouchableOpacity, Image } from "react-native";
 import styles from "./style";
 
-const Task = (props) => {
+const Item = (props) => {
   const { number } = props;
   const { link } = props;
   const numberText = number < 10 ? `0${number}` : number;
@@ -31,4 +31,4 @@ const Task = (props) => {
   );
 };
 
-export default Task;
+export default Item;
