@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { StatusBar } from "expo-status-bar";
+import { createContext } from "react";
 
 import {
   StyleSheet,
@@ -16,9 +17,11 @@ import Item from "./components/Item";
 import styles from "./App.components.style";
 import Form from "./components/Form";
 
+export const bookContext = createContext();
 const App = () => {
   const [bookList, setBookList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  
 
   const apiUrl = "https://634812e00484786c6e91130b.mockapi.io/api/books/";
 
@@ -32,7 +35,7 @@ const App = () => {
       body: JSON.stringify({ item: name, link: linkImg }),
     });
   };
-  const handleUpdateBook = (name, id) =>{
+  const handleUpdateBook = (name, id) => {
     let url = apiUrl + index;
     fetch(url, {
       method: "PUT",
@@ -41,7 +44,7 @@ const App = () => {
       },
       body: JSON.stringify({ item: name }),
     });
-  }
+  };
 
   const getListBooks = () => {
     fetch(apiUrl)
@@ -65,15 +68,12 @@ const App = () => {
       {
         text: "OK",
         onPress: () => {
-          fetch(
-            url,
-            {
-              method: "DELETE",
-              headers: {
-                "Content-Type": "application/json",
-              },
-            }
-          );
+          fetch(url, {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
         },
       },
       { text: "Cancel", onPress: () => {} },
@@ -89,13 +89,15 @@ const App = () => {
           <FlatList
             data={bookList}
             renderItem={({ item }) => (
-              <Item
-              key={bookList.indexOf(item)}
-              title={item.item}
-              link={item.link}
-              number={bookList.indexOf(item) + 1}
-              onDeleteBook={() => handleDeleteBook(item.id)}
-              />
+              <bookContext.Provider value={item}>
+                <Item
+                  // key={bookList.indexOf(item)}
+                  // title={item.item}
+                  // link={item.link}
+                  // number={bookList.indexOf(item) + 1}
+                  // onDeleteBook={() => handleDeleteBook(item.id)}
+                />
+              </bookContext.Provider>
             )}
           />
         )}
